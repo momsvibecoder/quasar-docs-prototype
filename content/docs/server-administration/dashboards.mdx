@@ -1,0 +1,46 @@
+---
+title: Dashboards
+description: Monitoring examples with metrics, inline formulas, and chart-heavy documentation content.
+---
+
+Metrics provide real-time visibility into the system's health, but they are also crucial for retrospective analysis. Understanding what went wrong days ago, or identifying when a workload pattern started changing, requires consistent instrumentation.
+
+## 5.4.1. Slow Queries Over Time
+
+A sustained increase in slow queries often indicates a latent performance issue: I/O bottlenecks, cache exhaustion, or shifts in query shape.
+
+Metrics used:
+
+- `requests.slow_count` — number of slow queries, per sampling interval
+
+Interpretation:
+
+- Occasional spikes can be normal under load
+- Frequent or sustained increases suggest a need to investigate disk, memory, or query behavior
+
+<Figure>
+  <ChartPlaceholder />
+</Figure>
+
+## 5.4.2. Error Count and Rate
+
+Errors often increase during deployment rollouts, schema changes, or when invalid queries are being sent by clients.
+
+```sql
+SELECT
+  timestamp,
+  requests_error_count,
+  requests_success_count,
+  requests_error_count / total_count * 100 AS error_rate
+FROM qdb_metrics
+```
+
+## 5.4.3. Persistence Read vs Write Throughput
+
+Backend I/O activity is a critical signal for detecting compaction stress, ingestion surges, or inefficient data layout.
+
+| Metric | Meaning | Signal |
+| --- | --- | --- |
+| `persistence_read_bytes` | Read throughput | Backfill or remote storage reads |
+| `persistence_written_bytes` | Write throughput | Ingestion pressure |
+| `cache_hit_ratio` | Cache effectiveness | Memory sizing and query locality |

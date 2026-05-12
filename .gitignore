@@ -1,0 +1,12 @@
+node_modules
+.next
+.next.*
+.source
+.home
+.tools
+pnpm.cjs
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example

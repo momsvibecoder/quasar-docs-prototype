@@ -1,0 +1,10 @@
+{
+  "title": "QuasarDB",
+  "pages": [
+    "index",
+    "primer",
+    "server-administration",
+    "user-guide",
+    "query-language"
+  ]
+}

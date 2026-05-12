@@ -1,0 +1,219 @@
+---
+title: Primer
+description: A long-form article page with dense explanations, code samples, callouts, tables, and operational notes.
+---
+
+## What is QuasarDB?
+
+QuasarDB is a column-oriented, distributed time-series database designed to reliably store large amounts of data while still delivering interactive analytical performance.
+
+It is usually a strong fit when teams need fast writes, deterministic reads, and a query model that stays comfortable for analysts and engineers.
+
+> Common use cases include market data stores, trade compliance, sensor repositories, deployment monitoring, and simulation result analysis.
+
+When evaluating a new cluster, operators usually start with a single server and a minimal client. The server listens on `qdb://127.0.0.1:2836`, while clients authenticate using the configured security file.
+
+<Callout type="important" title="Important">
+  Full stream encryption must be enabled on both the server via `global.security.encrypt_traffic` and the client via API-specific parameters.
+</Callout>
+
+## Shall we dance?
+
+To start a QuasarDB server, run a local daemon process and connect with the shell. Docker is a convenient way to create a short feedback loop for validating schema design, retention policies, and first queries.
+
+```bash
+docker run -p 2836-2837:2836-2837 -d --name qdb-server bureau14/qdb
+```
+
+You should be able to see the container running:
+
+```bash
+docker ps
+CONTAINER ID   IMAGE          STATUS         PORTS                    NAMES
+ad0eb8962750   bureau14/qdb   Up 2 minutes   0.0.0.0:2836-2837/tcp    qdb-server
+```
+
+QuasarDB is typically used via its multi-language API. For this introduction, we will keep the workflow focused on the Python API and the shell.
+
+```bash
+docker run -ti --link qdb-server:qdb-server bureau14/qdbsh \
+  --cluster qdb://qdb-server:2836
+```
+
+## Inserting timeseries data
+
+We're going to create a single-column timeseries and insert data. The name of the timeseries will be `stocks` and the name of its unique column will be `close`.
+
+```sql
+CREATE TABLE stocks (close DOUBLE);
+```
+
+This is the code you need to write with the Python API:
+
+```python
+import datetime
+import quasardb
+
+cluster = quasardb.Cluster("qdb://127.0.0.1:2836")
+table = cluster.table("stocks")
+
+table.insert([
+    (datetime.datetime(2026, 5, 11, 9, 0), 183.24),
+    (datetime.datetime(2026, 5, 11, 9, 1), 184.11),
+    (datetime.datetime(2026, 5, 11, 9, 2), 183.92),
+])
+```
+
+<Callout type="note" title="Note">
+  Operations performed on timeseries are transactional, atomic, and consistent.
+</Callout>
+
+You create the timeseries once, just like you create a SQL table once. If you need to delete the whole timeseries, you can use either the shell or the Python API.
+
+```sql
+DROP TABLE stocks;
+```
+
+```python
+cluster = quasardb.Cluster("qdb://127.0.0.1:2836")
+table = cluster.table("stocks")
+table.remove()
+```
+
+For batch workflows, Python users often insert directly from arrays:
+
+```python
+import numpy as np
+
+dates = np.arange(
+    np.datetime64("2026-05-11T09:00"),
+    np.datetime64("2026-05-11T09:03"),
+).astype("datetime64[ns]")
+
+values = np.array([183.24, 184.11, 183.92])
+table.double_insert("close", dates, values)
+```
+
+## Working with the data
+
+You can query data directly from the shell.
+
+```sql
+SELECT * FROM stocks;
+```
+
+For analytical workloads, QuasarDB is commonly used for sustained queries over telemetry, trades, simulation results, and high-frequency measurements.
+
+| Concept | Usage | Example |
+| --- | --- | --- |
+| Table | A named time-series container | `stocks` |
+| Column | A typed measurement stream | `close DOUBLE` |
+| Timestamp | The time index | `2026-05-11T09:00:00Z` |
+| Query | SQL-like analytical expression | `SELECT * FROM stocks` |
+
+The shell can display both metadata and records:
+
+```bash
+qdbsh > show stocks
+2 columns
+
+0. timestamp - nanosecond timestamp
+1. close - 64-bit double
+```
+
+```bash
+qdbsh > select * from stocks in range(2026-05-11, +3 m)
+timestamp                      close
+--------------------------------------------
+2026-05-11T09:00:00.000000000Z 183.240000
+2026-05-11T09:01:00.000000000Z 184.110000
+2026-05-11T09:02:00.000000000Z 183.920000
+```
+
+> Try the same pattern with filters, rolling intervals, and aggregations:
+>
+> - `select min(close), max(close) from stocks in range(now(), -1 d)`
+> - `select arithmetic_mean(close) from stocks in range(2026, +1 y) group by day`
+> - `select close from stocks in range(2026-05-11, +1 d) where close > 184`
+
+## Organizing your data
+
+As deployments grow, teams often need to find time-series by criteria other than name. QuasarDB supports tag-based lookup, which makes operational grouping straightforward.
+
+```bash
+qdbsh > attach_tag stocks nyse
+qdbsh > attach_tag stocks usd
+```
+
+Then you can look up matching series:
+
+```bash
+qdbsh > get_tagged usd
+1. stocks - timeseries
+```
+
+It is also possible to ask compound questions:
+
+```bash
+qdbsh > find(tag='usd' and not tag='nyse')
+An entry matching the provided alias cannot be found.
+```
+
+<Callout type="note" title="Note">
+  Tags are useful for separating data by venue, owner, asset class, retention policy, or lifecycle stage.
+</Callout>
+
+## Production shape
+
+The size and configuration of a cluster should not leak into application logic. The client code keeps using a connection string while QuasarDB handles discovery and distribution.
+
+```python
+cluster = quasardb.Cluster(
+    "qdb://10.0.0.10:2836,10.0.0.11:2836,10.0.0.12:2836",
+    timeout=datetime.timedelta(minutes=1),
+)
+```
+
+| Production concern | Recommended pattern |
+| --- | --- |
+| Discovery | Provide multiple cluster nodes in the connection string |
+| Resilience | Let the client retry another node when one is unavailable |
+| Security | Enable encrypted traffic and use configured credentials |
+| Operations | Tag datasets and monitor ingestion/query metrics |
+
+## Going further
+
+This quick tour is intentionally small. From here, most teams continue with API docs for their language of choice, then move into administrative topics like deployment sizing, dashboards, retention, and backup strategy.
+
+<Tabs defaultValue="python">
+  <TabList>
+    <Tab value="python" active>Python</Tab>
+    <Tab value="shell">Shell</Tab>
+    <Tab value="sql">SQL</Tab>
+  </TabList>
+  <TabPanel value="python" title="python next steps">
+    Read data model concepts, create your first table, insert a small batch, then add tags and queries.
+  </TabPanel>
+  <TabPanel value="shell" title="shell next steps">
+    Start `qdbsh`, inspect your table with `show stocks`, and run a bounded range query.
+  </TabPanel>
+  <TabPanel value="sql" title="sql next steps">
+    Practice `SELECT`, aggregate functions, and time windows with `range()` clauses.
+  </TabPanel>
+</Tabs>
+
+## Wrap up
+
+Things to remember about QuasarDB:
+
+> - Fast and scalable
+> - Native time-series support
+> - High-performance binary protocol
+> - Transparent persistence
+> - Distributed transactions
+> - Tag-based search
+
+<DocPager
+  previous={{ label: 'Previous', title: 'Home', href: '/docs' }}
+  next={{ label: 'Next', title: 'Server Administration', href: '/docs/server-administration/installation' }}
+/>
