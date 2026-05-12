@@ -412,6 +412,26 @@ body {
   white-space: pre;
 }
 
+.fd-docs .shiki {
+  color: var(--q-code-text);
+}
+
+.fd-docs .shiki span {
+  color: var(--shiki-light, var(--q-code-text));
+}
+
+:root[data-theme='dark'] .fd-docs .shiki span {
+  color: var(--shiki-dark, var(--q-code-text));
+}
+
+:root[data-theme='light'] .fd-docs .shiki span[style*='#032F62'] {
+  color: #008a32;
+}
+
+:root[data-theme='dark'] .fd-docs .shiki span[style*='#9ECBFF'] {
+  color: #7ee787;
+}
+
 .fd-docs [class*='rounded-xl'] pre,
 .fd-docs [class*='rounded-lg'] pre {
   margin: 0.75rem 0 0;
