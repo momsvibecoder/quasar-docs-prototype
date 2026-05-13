@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
-import { ChevronRight, ExternalLink, Search } from 'lucide-react';
+import { ChevronRight, ExternalLink } from 'lucide-react';
+import { DocsSearch } from '@/components/docs-search';
 import { MobileDocsMenu } from '@/components/mobile-docs-menu';
-import { docsNavGroups, footerGroups } from '@/lib/docs-nav';
+import { docsNavGroups, docsSearchItems, footerGroups } from '@/lib/docs-nav';
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,30 +13,12 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           <a href="/docs" className="flex items-center gap-3">
             <img src="/quasar-logo.svg" alt="Quasar" className="h-7 w-auto" />
           </a>
-          <button
-            type="button"
-            className="absolute left-1/2 hidden h-9 w-[276px] -translate-x-1/2 items-center gap-2 rounded-lg border border-white/18 bg-white/[0.08] px-3 text-sm text-white/58 transition hover:border-white/28 hover:bg-white/[0.12] md:flex"
-          >
-            <Search className="h-4 w-4 shrink-0 text-primary" />
-            <span className="truncate">Search Documentation</span>
-            <span className="ml-auto rounded-md border border-white/22 bg-white/8 px-1.5 py-0.5 font-mono text-[11px] leading-4 text-white/78">
-              ⌘ K
-            </span>
-          </button>
+          <DocsSearch items={docsSearchItems} />
           <div className="ml-auto hidden items-center gap-4 md:flex">
             <a href="https://quasar.ai" className="inline-flex items-center gap-1.5 text-sm text-white/72 hover:text-white">
               Quasar.ai
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
-          </div>
-          <div className="ml-auto flex md:hidden">
-            <button
-              type="button"
-              className="flex h-9 w-9 items-center justify-center rounded-md border border-white/24 text-white/72"
-              aria-label="Search docs"
-            >
-              <Search className="h-4 w-4 text-primary" />
-            </button>
           </div>
         </div>
       </header>

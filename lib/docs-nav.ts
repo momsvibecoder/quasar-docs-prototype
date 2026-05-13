@@ -102,3 +102,34 @@ export const footerGroups = [
     ],
   },
 ];
+
+export type DocsSearchItem = {
+  title: string;
+  href: string;
+  section: string;
+  description?: string;
+  type?: 'page' | 'section';
+};
+
+const docsSearchMap = new Map<string, DocsSearchItem>();
+
+for (const group of docsNavGroups) {
+  docsSearchMap.set(group.href, {
+    title: group.title,
+    href: group.href,
+    section: 'Documentation',
+    description: `Open ${group.title}`,
+    type: 'page',
+  });
+
+  for (const item of group.items) {
+    docsSearchMap.set(item.href, {
+      title: item.title,
+      href: item.href,
+      section: group.title,
+      type: 'section',
+    });
+  }
+}
+
+export const docsSearchItems = Array.from(docsSearchMap.values());
