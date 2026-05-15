@@ -33,12 +33,14 @@ export function getMDXComponents(base: MDXComponents = {}): MDXComponents {
       children: ReactNode;
     }) => (
       <a href={href} className="no-underline">
-        <Card className="h-full">
-          <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-md bg-primary/15 text-primary">
-            <ArrowRight className="h-4 w-4" />
+        <Card className="flex h-full flex-col gap-3 p-5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md border border-primary/22 bg-primary/14 text-primary">
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </div>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{children}</CardDescription>
+          <div className="flex flex-col gap-2">
+            <CardTitle>{title}</CardTitle>
+            <CardDescription className="leading-5 [&_p]:m-0">{children}</CardDescription>
+          </div>
         </Card>
       </a>
     ),

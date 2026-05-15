@@ -28,7 +28,7 @@ export function ThemeSwitcher() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-50 flex rounded-full border border-border bg-card p-1 shadow-[0_12px_34px_rgb(0_0_0/0.22)]"
+      className="fixed bottom-4 right-4 z-[90] flex rounded-full border border-border bg-card p-1 shadow-[0_12px_34px_rgb(0_0_0/0.22)]"
       aria-label="Theme switcher"
     >
       <button

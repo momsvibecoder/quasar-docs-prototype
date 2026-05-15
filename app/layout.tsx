@@ -18,6 +18,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: `
               (function () {
                 var storageKey = 'quasar-docs-theme';
+                window.__quasarDocsFallbackReady = true;
+
+                function showElement(element) {
+                  if (!element) return;
+                  element.removeAttribute('hidden');
+                }
+
+                function hideElement(element) {
+                  if (!element) return;
+                  element.setAttribute('hidden', '');
+                }
 
                 function getStoredTheme() {
                   try {
@@ -31,8 +42,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 function applyTheme(theme) {
                   if (theme !== 'light' && theme !== 'dark') theme = 'dark';
 
-                document.documentElement.dataset.theme = theme;
-                document.documentElement.style.colorScheme = theme;
+                  document.documentElement.dataset.theme = theme;
+                  document.documentElement.style.colorScheme = theme;
 
                   try {
                     localStorage.setItem(storageKey, theme);
@@ -42,6 +53,51 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   for (var i = 0; i < buttons.length; i += 1) {
                     var isActive = buttons[i].getAttribute('data-theme-option') === theme;
                     buttons[i].setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                  }
+                }
+
+                function setMobileMenu(open) {
+                  var menu = document.querySelector('[data-mobile-docs-menu]');
+                  if (!menu) return;
+
+                  var trigger = document.querySelector('[data-mobile-menu-trigger]');
+                  if (open) {
+                    showElement(menu);
+                  } else {
+                    hideElement(menu);
+                  }
+
+                  if (trigger) {
+                    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+                  }
+
+                  document.body.style.overflow = open ? 'hidden' : '';
+                }
+
+                function activateTab(button) {
+                  var root = button.closest('[data-tabs-root]');
+                  if (!root) return;
+
+                  var value = button.getAttribute('data-tabs-value');
+                  if (!value) return;
+
+                  var triggers = root.querySelectorAll('[data-tabs-trigger]');
+                  for (var i = 0; i < triggers.length; i += 1) {
+                    var isCurrent = triggers[i].getAttribute('data-tabs-value') === value;
+                    triggers[i].setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+                    triggers[i].classList.toggle('border-foreground', isCurrent);
+                    triggers[i].classList.toggle('text-foreground', isCurrent);
+                    triggers[i].classList.toggle('border-transparent', !isCurrent);
+                    triggers[i].classList.toggle('text-muted-foreground', !isCurrent);
+                  }
+
+                  var panels = root.querySelectorAll('[data-tabs-panel]');
+                  for (var j = 0; j < panels.length; j += 1) {
+                    if (panels[j].getAttribute('data-tabs-value') === value) {
+                      showElement(panels[j]);
+                    } else {
+                      hideElement(panels[j]);
+                    }
                   }
                 }
 
@@ -56,9 +112,64 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   if (!target || !target.closest) return;
 
                   var button = target.closest('[data-theme-option]');
-                  if (!button) return;
+                  if (button) {
+                    applyTheme(button.getAttribute('data-theme-option'));
+                    return;
+                  }
 
-                  applyTheme(button.getAttribute('data-theme-option'));
+                  var tabTrigger = target.closest('[data-tabs-trigger]');
+                  if (tabTrigger) {
+                    activateTab(tabTrigger);
+                    return;
+                  }
+
+                  var mobileMenuTrigger = target.closest('[data-mobile-menu-trigger]');
+                  if (mobileMenuTrigger) {
+                    setMobileMenu(true);
+                    return;
+                  }
+
+                  if (target.closest('[data-mobile-menu-close]') || target.closest('[data-mobile-menu-link]')) {
+                    setMobileMenu(false);
+                    return;
+                  }
+
+                  var searchTrigger = target.closest('[data-docs-search-trigger]');
+                  if (searchTrigger) {
+                    var dialog = document.querySelector('[data-docs-search-dialog]');
+                    if (!dialog) return;
+                    showElement(dialog);
+                    window.setTimeout(function () {
+                      var input = document.querySelector('[data-docs-search-input]');
+                      if (input && input.focus) input.focus();
+                    }, 0);
+                    return;
+                  }
+
+                  var searchClose = target.closest('[data-docs-search-close]');
+                  if (searchClose) {
+                    var searchDialog = document.querySelector('[data-docs-search-dialog]');
+                    hideElement(searchDialog);
+                  }
+                });
+
+                document.addEventListener('keydown', function (event) {
+                  if ((event.metaKey || event.ctrlKey) && event.key && event.key.toLowerCase() === 'k') {
+                    var dialog = document.querySelector('[data-docs-search-dialog]');
+                    if (!dialog) return;
+                    event.preventDefault();
+                    showElement(dialog);
+                    window.setTimeout(function () {
+                      var input = document.querySelector('[data-docs-search-input]');
+                      if (input && input.focus) input.focus();
+                    }, 0);
+                  }
+
+                  if (event.key === 'Escape') {
+                    var searchDialog = document.querySelector('[data-docs-search-dialog]');
+                    hideElement(searchDialog);
+                    setMobileMenu(false);
+                  }
                 });
               })();
             `,

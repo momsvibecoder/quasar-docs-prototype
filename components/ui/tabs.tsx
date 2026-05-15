@@ -34,10 +34,7 @@ export function Tabs({
 
   return (
     <TabsContext.Provider value={contextValue}>
-      <div
-        className={cn('not-prose my-6 overflow-hidden rounded-lg border border-border bg-card', className)}
-        {...props}
-      >
+      <div className={cn('not-prose my-6', className)} data-tabs-root {...props}>
         {children}
       </div>
     </TabsContext.Provider>
@@ -48,7 +45,7 @@ export function TabList({ className, ...props }: HTMLAttributes<HTMLDivElement>)
   return (
     <div
       role="tablist"
-      className={cn('flex flex-wrap gap-1 border-b border-border bg-muted/35 p-1', className)}
+      className={cn('flex flex-wrap gap-7 border-b border-border', className)}
       {...props}
     />
   );
@@ -76,6 +73,8 @@ export function Tab({
     <button
       type="button"
       role="tab"
+      data-tabs-trigger
+      data-tabs-value={tabValue}
       disabled={disabled}
       aria-selected={isSelected}
       aria-disabled={disabled}
@@ -83,11 +82,11 @@ export function Tab({
         if (!disabled && tabValue) tabs?.setValue(tabValue);
       }}
       className={cn(
-        'inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium text-muted-foreground transition',
-        'hover:bg-background hover:text-foreground',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card',
+        'relative -mb-px inline-flex h-10 items-center justify-center border-b-2 border-transparent px-0 text-base font-medium text-muted-foreground transition',
+        'hover:text-foreground',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
         'disabled:pointer-events-none disabled:opacity-45',
-        isSelected && 'bg-primary text-primary-foreground shadow-sm hover:bg-primary hover:text-primary-foreground',
+        isSelected && 'border-foreground text-foreground',
         className,
       )}
       {...props}
@@ -111,11 +110,15 @@ export function TabPanel({
   const tabs = useContext(TabsContext);
   const isVisible = !value || !tabs?.value || tabs.value === value;
 
-  if (!isVisible) return null;
-
   return (
-    <div role="tabpanel" className={cn('q-tab-panel bg-card p-4', className)}>
-      {title ? <div className="mb-3 text-xs font-medium uppercase tracking-wide text-primary">{title}</div> : null}
+    <div
+      role="tabpanel"
+      data-tabs-panel
+      data-tabs-value={value}
+      hidden={!isVisible}
+      className={cn('q-tab-panel pt-5', className)}
+    >
+      {title ? <div className="mb-3 text-sm font-medium text-muted-foreground">{title}</div> : null}
       <div className="font-mono text-[13px] leading-7 text-[var(--q-code-text)]">{children}</div>
     </div>
   );

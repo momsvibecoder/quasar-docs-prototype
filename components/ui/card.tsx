@@ -14,9 +14,9 @@ export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
 }
 
 export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn('mb-2 text-base font-semibold text-foreground', className)} {...props} />;
+  return <h3 className={cn('text-base font-semibold text-foreground', className)} {...props} />;
 }
 
-export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('m-0 text-sm leading-6 text-muted-foreground', className)} {...props} />;
+export function CardDescription({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('text-sm leading-6 text-muted-foreground', className)} {...props} />;
 }

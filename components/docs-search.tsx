@@ -98,12 +98,13 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
     <>
       <button
         type="button"
-        className="absolute left-1/2 hidden h-9 w-[276px] -translate-x-1/2 items-center gap-2 rounded-lg border border-white/18 bg-white/[0.08] px-3 text-sm text-white/58 transition hover:border-white/28 hover:bg-white/[0.12] md:flex"
+        className="q-docs-search-trigger absolute left-1/2 z-10 hidden h-9 w-[276px] -translate-x-1/2 items-center gap-2 rounded-lg px-2 pl-3 text-sm transition md:flex"
+        data-docs-search-trigger
         onClick={() => setOpen(true)}
       >
-        <Search className="h-4 w-4 shrink-0 text-primary" />
+        <Search className="q-docs-search-icon h-4 w-4 shrink-0" />
         <span className="truncate">Search Documentation</span>
-        <span className="ml-auto rounded-md border border-white/22 bg-white/8 px-1.5 py-0.5 font-mono text-[11px] leading-4 text-white/78">
+        <span className="q-docs-search-command ml-auto rounded-md px-2 py-1 font-mono text-[13px] leading-4">
           ⌘ K
         </span>
       </button>
@@ -111,22 +112,29 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
       <div className="ml-auto flex md:hidden">
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-white/24 text-white/72"
+          className="q-docs-search-trigger flex h-9 w-9 items-center justify-center rounded-md"
           aria-label="Search docs"
+          data-docs-search-trigger
           onClick={() => setOpen(true)}
         >
-          <Search className="h-4 w-4 text-primary" />
+          <Search className="q-docs-search-icon h-4 w-4" />
         </button>
       </div>
 
-      {open ? (
-        <div className="fixed inset-0 z-[70] bg-background/72 backdrop-blur-sm" role="dialog" aria-modal="true">
-          <button type="button" className="absolute inset-0 cursor-default" aria-label="Close search" onClick={close} />
+      <div
+        className="fixed inset-0 z-[70] bg-background/72 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+        data-docs-search-dialog
+        hidden={!open}
+      >
+          <button type="button" className="absolute inset-0 cursor-default" aria-label="Close search" data-docs-search-close onClick={close} />
           <div className="relative mx-auto mt-24 w-[min(calc(100vw-32px),680px)] overflow-hidden rounded-xl border border-border bg-card shadow-[0_22px_70px_rgb(0_0_0/0.18)]">
             <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-              <Search className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+              <Search className="q-docs-search-icon h-5 w-5 shrink-0" aria-hidden="true" />
               <input
                 ref={inputRef}
+                data-docs-search-input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={onInputKeyDown}
@@ -135,7 +143,8 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
               />
               <button
                 type="button"
-                className="hidden rounded-md border border-border px-2 py-1 text-xs text-muted-foreground transition hover:text-foreground sm:block"
+                className="q-docs-search-command hidden rounded-md px-2 py-1 text-xs transition hover:text-foreground sm:block"
+                data-docs-search-close
                 onClick={close}
               >
                 Esc
@@ -144,6 +153,7 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
                 type="button"
                 className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition hover:bg-accent hover:text-foreground sm:hidden"
                 aria-label="Close search"
+                data-docs-search-close
                 onClick={close}
               >
                 <X className="h-4 w-4" aria-hidden="true" />
@@ -183,7 +193,6 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
             </div>
           </div>
         </div>
-      ) : null}
     </>
   );
 }
