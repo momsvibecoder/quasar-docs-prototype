@@ -129,21 +129,21 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
         hidden={!open}
       >
           <button type="button" className="absolute inset-0 cursor-default" aria-label="Close search" data-docs-search-close onClick={close} />
-          <div className="relative mx-auto mt-24 w-[min(calc(100vw-32px),680px)] overflow-hidden rounded-xl border border-border bg-card shadow-[0_22px_70px_rgb(0_0_0/0.18)]">
-            <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-              <Search className="q-docs-search-icon h-5 w-5 shrink-0" aria-hidden="true" />
+          <div className="relative mx-auto mt-20 w-[min(calc(100vw-32px),560px)] overflow-hidden rounded-xl border border-border bg-card shadow-[0_18px_56px_rgb(0_0_0/0.16)]">
+            <div className="flex h-14 items-center gap-3 border-b border-border px-4">
+              <Search className="q-docs-search-icon h-4 w-4 shrink-0" aria-hidden="true" />
               <input
                 ref={inputRef}
                 data-docs-search-input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={onInputKeyDown}
-                className="h-full min-w-0 flex-1 bg-transparent text-lg text-foreground outline-none placeholder:text-muted-foreground"
+                className="h-full min-w-0 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
                 placeholder="What are you searching for?"
               />
               <button
                 type="button"
-                className="q-docs-search-command hidden rounded-md px-2 py-1 text-xs transition hover:text-foreground sm:block"
+                className="q-docs-search-command hidden rounded-md px-2 py-1 text-xs leading-4 transition hover:text-foreground sm:block"
                 data-docs-search-close
                 onClick={close}
               >
@@ -160,28 +160,27 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
               </button>
             </div>
 
-            <div className="px-3 py-4">
-              <div className="mb-2 px-2 text-sm text-muted-foreground">{query ? 'Results' : 'Suggestions'}</div>
-              <div className="space-y-1">
+            <div className="px-3 py-3">
+              <div className="px-2 pb-2 text-sm leading-5 text-muted-foreground">{query ? 'Results' : 'Suggestions'}</div>
+              <div className="flex flex-col gap-1">
                 {results.length > 0 ? (
                   results.map((item, index) => (
                     <a
                       key={`${item.href}-${item.title}`}
                       href={item.href}
-                      className={`group flex items-center gap-3 rounded-lg px-3 py-3 text-sm transition hover:bg-accent ${
-                        index === activeIndex ? 'bg-accent' : ''
+                      className={`q-docs-search-result group flex h-11 items-center gap-3 rounded-md px-3 text-sm transition ${
+                        index === activeIndex ? 'q-docs-search-result-active' : ''
                       }`}
                       onClick={close}
                       onMouseEnter={() => setActiveIndex(index)}
                     >
                       {item.type === 'page' ? (
-                        <BookOpen className="h-5 w-5 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
+                        <BookOpen className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
                       ) : (
-                        <FileText className="h-5 w-5 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
+                        <FileText className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
                       )}
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-base text-foreground">{item.title}</span>
-                        <span className="block truncate text-xs text-muted-foreground">{item.section}</span>
+                      <span className="min-w-0 flex-1 truncate text-sm font-medium leading-5 text-foreground">
+                        {item.title}
                       </span>
                       {index === 0 ? <span className="hidden text-xs text-muted-foreground sm:block">Enter</span> : null}
                     </a>
