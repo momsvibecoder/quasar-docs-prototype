@@ -34,7 +34,7 @@ export function Tabs({
 
   return (
     <TabsContext.Provider value={contextValue}>
-      <div className={cn('not-prose my-6', className)} data-tabs-root {...props}>
+      <div className={cn('not-prose', className)} data-tabs-root {...props}>
         {children}
       </div>
     </TabsContext.Provider>

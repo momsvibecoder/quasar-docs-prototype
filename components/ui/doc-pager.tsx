@@ -15,7 +15,7 @@ export function DocPager({
   next?: DocPagerLink;
 }) {
   return (
-    <nav className="not-prose mt-12 grid gap-8 border-t border-border pt-8 sm:grid-cols-2" aria-label="Docs pagination">
+    <nav className="not-prose grid gap-8 border-t border-border pt-8 sm:grid-cols-2" aria-label="Docs pagination">
       <PagerCard direction="previous" item={previous} />
       <PagerCard direction="next" item={next} />
     </nav>

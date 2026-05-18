@@ -22,7 +22,8 @@ export function getMDXComponents(base: MDXComponents = {}): MDXComponents {
     pre: CodeBlock,
     Figure,
     ChartPlaceholder,
-    Cards: ({ children }) => <div className="q-card-grid not-prose my-6">{children}</div>,
+    DocSection: ({ children }) => <section className="q-doc-section">{children}</section>,
+    Cards: ({ children }) => <div className="q-card-grid not-prose">{children}</div>,
     CardLink: ({
       title,
       href,
