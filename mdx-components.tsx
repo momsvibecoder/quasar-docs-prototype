@@ -5,25 +5,63 @@ import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import { Callout } from '@/components/ui/callout';
 import { Button } from '@/components/ui/button';
 import { ChartPlaceholder, Figure } from '@/components/ui/figure';
-import { Tab, TabList, TabPanel, Tabs } from '@/components/ui/tabs';
-import { DocPager } from '@/components/ui/doc-pager';
+import { Tab, TabList, TabPanel, Tabs as TabsRoot } from '@/components/ui/tabs';
+import { DocPager as DocPagerRoot } from '@/components/ui/doc-pager';
 import { CodeBlock } from '@/components/ui/code-block';
+
+function DocObject({ children }: { children: ReactNode }) {
+  return <div className="q-doc-object">{children}</div>;
+}
 
 export function getMDXComponents(base: MDXComponents = {}): MDXComponents {
   return {
     ...base,
-    Callout,
+    Callout: (props) => (
+      <DocObject>
+        <Callout {...props} />
+      </DocObject>
+    ),
     Button,
-    Tabs,
+    Tabs: (props) => (
+      <DocObject>
+        <TabsRoot {...props} />
+      </DocObject>
+    ),
     TabList,
     Tab,
     TabPanel,
-    DocPager,
-    pre: CodeBlock,
-    Figure,
+    DocPager: (props) => (
+      <DocObject>
+        <DocPagerRoot {...props} />
+      </DocObject>
+    ),
+    pre: (props) => (
+      <DocObject>
+        <CodeBlock {...props} />
+      </DocObject>
+    ),
+    blockquote: (props) => (
+      <DocObject>
+        <blockquote {...props} />
+      </DocObject>
+    ),
+    table: (props) => (
+      <DocObject>
+        <table {...props} />
+      </DocObject>
+    ),
+    Figure: (props) => (
+      <DocObject>
+        <Figure {...props} />
+      </DocObject>
+    ),
     ChartPlaceholder,
     DocSection: ({ children }) => <section className="q-doc-section">{children}</section>,
-    Cards: ({ children }) => <div className="q-card-grid not-prose">{children}</div>,
+    Cards: ({ children }) => (
+      <DocObject>
+        <div className="q-card-grid not-prose">{children}</div>
+      </DocObject>
+    ),
     CardLink: ({
       title,
       href,
