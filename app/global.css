@@ -59,6 +59,12 @@
   --q-header-muted-hover: #ffffff;
   --q-header-logo-filter: none;
   --q-card-hover-bg: #202329;
+  --q-aside-bg: #202329;
+  --q-aside-border: #3a3f48;
+  --q-callout-note-bg: rgb(52 211 153 / 0.1);
+  --q-callout-note-border: rgb(52 211 153 / 0.45);
+  --q-callout-warning-bg: #2b2513;
+  --q-callout-warning-border: #9d7a21;
 
   --fd-background: 210 9% 9%;
   --fd-foreground: 0 0% 100%;
@@ -131,6 +137,12 @@
   --q-header-muted-hover: #000000;
   --q-header-logo-filter: invert(1);
   --q-card-hover-bg: #f7f7f7;
+  --q-aside-bg: #f7f7f7;
+  --q-aside-border: #d4d4d4;
+  --q-callout-note-bg: rgb(52 211 153 / 0.11);
+  --q-callout-note-border: rgb(52 211 153 / 0.5);
+  --q-callout-warning-bg: #fff8db;
+  --q-callout-warning-border: #efd36c;
 
   --fd-background: 0 0% 100%;
   --fd-foreground: 0 0% 0%;
@@ -374,38 +386,34 @@ body {
 
 .fd-docs blockquote {
   margin: 1.5rem 0;
-  border: 1px solid var(--q-border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--q-aside-border);
   border-left: 3px solid var(--primary);
   border-radius: 0.75rem;
-  background: color-mix(in oklab, var(--primary) 7%, var(--card));
+  background: var(--q-aside-bg);
   color: var(--q-prose-body);
   padding: 1.25rem;
   font-style: normal;
   line-height: 1.5;
 }
 
-.fd-docs blockquote p:first-child {
-  margin-top: 0;
-}
-
 .fd-docs blockquote p {
-  margin-bottom: 0.65rem;
+  margin: 0;
 }
 
 .fd-docs blockquote ul,
 .fd-docs blockquote ol {
-  margin-top: 0.45rem;
-  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
   padding-left: 0;
 }
 
-.fd-docs blockquote > ul:first-child,
-.fd-docs blockquote > ol:first-child {
-  margin-top: 0;
-}
-
 .fd-docs blockquote li {
-  margin: 0.12rem 0;
+  margin: 0;
   padding-left: 0;
 }
 
@@ -419,11 +427,36 @@ body {
   margin-bottom: 0;
 }
 
+.fd-docs .q-callout {
+  margin: 1.5rem 0;
+}
+
+.q-callout-note,
+.q-callout-important {
+  border-color: var(--q-callout-note-border);
+  background: var(--q-callout-note-bg);
+}
+
+.q-callout-warning {
+  border-color: var(--q-callout-warning-border);
+  background: var(--q-callout-warning-bg);
+}
+
+.fd-docs .q-callout-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fd-docs .q-callout-content > * {
+  margin: 0;
+}
+
 .fd-docs .q-callout-content > ul,
 .fd-docs .q-callout-content > ol,
 .fd-docs .q-tab-panel ul,
 .fd-docs .q-tab-panel ol {
-  margin-top: 0.5rem;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -436,7 +469,7 @@ body {
 
 .fd-docs .q-callout-content li,
 .fd-docs .q-tab-panel li {
-  margin: 0.12rem 0;
+  margin: 0;
 }
 
 .fd-docs :not(pre) > code {
