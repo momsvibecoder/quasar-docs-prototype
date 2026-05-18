@@ -548,7 +548,7 @@ body {
   gap: 12px;
   border-bottom: 1px solid var(--border);
   background: color-mix(in oklab, var(--card) 82%, var(--background));
-  padding: 10px 14px;
+  padding: 12px 16px;
 }
 
 .fd-docs .q-code-block-title {
