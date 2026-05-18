@@ -7,23 +7,42 @@ type Theme = 'light' | 'dark';
 
 const storageKey = 'quasar-docs-theme';
 
+function getStoredTheme(): Theme {
+  try {
+    const savedTheme = window.localStorage?.getItem(storageKey) as Theme | null;
+    return savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+  } catch {
+    return 'dark';
+  }
+}
+
+function persistTheme(theme: Theme) {
+  try {
+    window.localStorage?.setItem(storageKey, theme);
+  } catch {
+    // Theme switching should still work when storage is unavailable.
+  }
+}
+
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+}
+
 export function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem(storageKey) as Theme | null;
-    const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+    const initialTheme = getStoredTheme();
 
     setTheme(initialTheme);
-    document.documentElement.dataset.theme = initialTheme;
-    document.documentElement.style.colorScheme = initialTheme;
+    applyTheme(initialTheme);
   }, []);
 
   function selectTheme(nextTheme: Theme) {
     setTheme(nextTheme);
-    window.localStorage.setItem(storageKey, nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    document.documentElement.style.colorScheme = nextTheme;
+    applyTheme(nextTheme);
+    persistTheme(nextTheme);
   }
 
   return (
