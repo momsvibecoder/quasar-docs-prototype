@@ -484,7 +484,7 @@ body {
 }
 
 .fd-docs .q-callout-icon {
-  color: #000000;
+  color: currentColor;
 }
 
 .fd-docs .q-callout-content {
