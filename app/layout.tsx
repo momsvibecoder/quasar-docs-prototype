@@ -175,7 +175,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex min-h-screen flex-col font-sans" suppressHydrationWarning>
         {children}
         <div
           className="fixed bottom-4 right-4 z-[90] flex rounded-full border border-border bg-card p-1 shadow-[0_12px_34px_rgb(0_0_0/0.22)]"
@@ -186,6 +186,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             title="Light theme"
             aria-label="Light theme"
             aria-pressed="false"
+            suppressHydrationWarning
             data-theme-option="light"
             className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition hover:text-foreground aria-pressed:bg-primary aria-pressed:text-primary-foreground"
           >
@@ -215,6 +216,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             title="Dark theme"
             aria-label="Dark theme"
             aria-pressed="true"
+            suppressHydrationWarning
             data-theme-option="dark"
             className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition hover:text-foreground aria-pressed:bg-primary aria-pressed:text-primary-foreground"
           >

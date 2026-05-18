@@ -43,11 +43,11 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
     <main className="grid min-h-[calc(100vh-4rem)] grid-cols-1 xl:grid-cols-[minmax(0,820px)_260px]">
       <article className="px-5 py-10 md:px-10 lg:px-14">
         <div className="mb-3 text-sm font-medium text-primary">QuasarDB Docs</div>
-        <h1 className="mb-4 max-w-3xl text-[40px] font-semibold leading-[48px] tracking-normal text-foreground">
+        <h1 className="mb-2 max-w-3xl text-[40px] font-semibold leading-[42px] tracking-normal text-foreground">
           {page.data.title}
         </h1>
         {page.data.description ? (
-          <p className="mb-6 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
+          <p className="mb-6 max-w-3xl text-base leading-[22px] text-muted-foreground">
             {page.data.description}
           </p>
         ) : null}
