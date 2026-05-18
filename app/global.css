@@ -758,6 +758,124 @@ body {
   color: var(--muted-foreground);
 }
 
+.q-text-image-block {
+  display: grid;
+  gap: 20px;
+  overflow: hidden;
+  border: 1px solid var(--q-border-strong);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 20px;
+}
+
+@media (min-width: 860px) {
+  .q-text-image-block {
+    grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1fr);
+    align-items: center;
+  }
+}
+
+.q-text-image-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.q-text-image-eyebrow {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.q-text-image-copy h3,
+.q-text-image-copy p {
+  margin: 0;
+}
+
+.q-text-image-copy h3 {
+  color: var(--foreground);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.q-text-image-copy p {
+  color: var(--muted-foreground);
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.q-text-image-media {
+  min-width: 0;
+}
+
+.q-dashboard-window {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--q-bg-subtle) 72%, var(--card));
+}
+
+.q-dashboard-window-header {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 12px;
+}
+
+.q-dashboard-window-header span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--muted-foreground) 42%, transparent);
+}
+
+.q-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 14px;
+}
+
+.q-dashboard-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  padding: 12px;
+}
+
+.q-dashboard-stat strong {
+  color: var(--foreground);
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.q-dashboard-stat span {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.q-dashboard-chart {
+  grid-column: 1 / -1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--primary);
+  padding: 12px;
+}
+
+.q-dashboard-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .q-install-options {
   width: 100%;
   overflow: hidden;

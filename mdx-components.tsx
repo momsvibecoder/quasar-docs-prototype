@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import { Callout } from '@/components/ui/callout';
 import { Button } from '@/components/ui/button';
-import { ChartPlaceholder, Figure } from '@/components/ui/figure';
+import { ChartPlaceholder, Figure, TextImageBlock as TextImageBlockRoot } from '@/components/ui/figure';
 import { Tab, TabList, TabPanel, Tabs as TabsRoot } from '@/components/ui/tabs';
 import { DocPager as DocPagerRoot } from '@/components/ui/doc-pager';
 import { CodeBlock } from '@/components/ui/code-block';
@@ -68,6 +68,11 @@ export function getMDXComponents(base: MDXComponents = {}): MDXComponents {
       </DocObject>
     ),
     ChartPlaceholder,
+    TextImageBlock: () => (
+      <DocObject>
+        <TextImageBlockRoot />
+      </DocObject>
+    ),
     DocSection: ({ children }) => <section className="q-doc-section">{children}</section>,
     Cards: ({ children }) => (
       <DocObject>
