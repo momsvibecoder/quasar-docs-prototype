@@ -607,6 +607,16 @@ body {
   padding-bottom: 8px;
 }
 
+.fd-docs .q-doc-object:has(> blockquote) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.fd-docs .q-doc-object:has(> table),
+.fd-docs .q-doc-object:has(> .q-docker-table-wrap) {
+  padding-bottom: 8px;
+}
+
 .fd-docs pre code {
   display: block;
   min-width: max-content;
