@@ -58,28 +58,20 @@ export function MobileDocsMenu({ groups }: { groups: DocsNavGroup[] }) {
             </button>
           </div>
 
-          <nav className="docs-sidebar space-y-2" aria-label="Mobile documentation navigation">
+          <nav className="docs-sidebar" aria-label="Mobile documentation navigation">
             {groups.map((group) => (
-              <details key={group.title} className="border-b border-border pb-2">
-                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-xl font-medium text-foreground">
+              <details key={group.title} className="q-menu-group">
+                <summary className="q-menu-selector">
+                  <ChevronRight className="q-menu-selector-icon" aria-hidden="true" />
                   <span>{group.title}</span>
-                  <ChevronRight className="q-sidebar-chevron h-5 w-5 shrink-0 text-muted-foreground transition-transform" aria-hidden="true" />
                 </summary>
-                <div className="space-y-1 pb-4">
-                  <a
-                    href={group.href}
-                    data-mobile-menu-link
-                    className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:text-primary"
-                    onClick={() => setOpen(false)}
-                  >
-                    Overview
-                  </a>
+                <div className="q-menu-sublist">
                   {group.items.map((item) => (
                     <a
                       key={`${group.title}-${item.title}`}
                       href={item.href}
                       data-mobile-menu-link
-                      className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:text-primary"
+                      className="q-menu-subitem"
                       onClick={() => setOpen(false)}
                     >
                       {item.title}

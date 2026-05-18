@@ -64,21 +64,17 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       </header>
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:grid-cols-[282px_minmax(0,1fr)]">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto bg-background px-4 py-6 lg:block">
-          <nav className="docs-sidebar space-y-1">
+        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto bg-background lg:block">
+          <nav className="docs-sidebar" aria-label="Documentation navigation">
             {docsNavGroups.map((group) => (
-              <details key={group.title} className="group/sidebar">
-                <summary className="flex cursor-pointer list-none items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition hover:text-primary">
-                  <ChevronRight className="q-sidebar-chevron h-3.5 w-3.5 shrink-0 transition-transform" aria-hidden="true" />
+              <details key={group.title} className="q-menu-group">
+                <summary className="q-menu-selector">
+                  <ChevronRight className="q-menu-selector-icon" aria-hidden="true" />
                   <span>{group.title}</span>
                 </summary>
-                <div className="mb-3 mt-1 space-y-0.5 pl-7">
+                <div className="q-menu-sublist">
                   {group.items.map((item) => (
-                    <a
-                      key={`${group.title}-${item.title}`}
-                      href={item.href}
-                      className="block rounded-md px-2 py-1.5 text-sm leading-5 text-secondary-foreground transition hover:text-primary"
-                    >
+                    <a key={`${group.title}-${item.title}`} href={item.href} className="q-menu-subitem">
                       {item.title}
                     </a>
                   ))}
@@ -121,7 +117,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                     <a
                       key={`${group.title}-${item.title}`}
                       href={item.href}
-                      className="flex w-fit items-center gap-2 text-sm text-white/58 transition hover:text-white hover:underline hover:underline-offset-4"
+                      className="flex w-fit items-center gap-2 text-sm text-white/[0.58] transition hover:text-white/[0.44]"
                     >
                       {item.title}
                     </a>
@@ -131,7 +127,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             ))}
             </div>
           </div>
-          <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.03] pt-4 text-sm text-[rgba(255,255,255,0.18)] sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.03] pt-4 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 QuasarDB SAS. All Rights Reserved.</span>
             <a href="https://quasar.ai/privacy-policy/" className="transition hover:text-white/55">
               Privacy Policy

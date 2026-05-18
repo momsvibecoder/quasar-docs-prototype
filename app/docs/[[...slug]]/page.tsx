@@ -63,7 +63,7 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
               <a
                 key={item.url}
                 href={item.url}
-                className="block text-sm text-muted-foreground transition hover:text-primary"
+                className="block py-1 text-base font-normal leading-[22px] text-muted-foreground transition hover:text-primary"
               >
                 {item.title}
               </a>
