@@ -401,7 +401,7 @@ body {
   border-radius: 0.75rem;
   background: var(--card);
   color: var(--q-prose-body);
-  padding: 1.25rem;
+  padding: 1.5rem;
   font-style: normal;
   line-height: 1.5;
 }
