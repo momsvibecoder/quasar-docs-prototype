@@ -26,7 +26,7 @@ export function Callout({
         <Icon className="q-callout-icon h-4 w-4 shrink-0" aria-hidden="true" />
         <span>{label}</span>
       </div>
-      <div className="q-callout-content p-5 text-muted-foreground [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
+      <div className="q-callout-content border-t p-5 text-foreground [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
         {children}
       </div>
     </div>
