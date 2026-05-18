@@ -30,7 +30,7 @@
   --q-border-strong: #3a3f48;
   --q-code-bg: #111514;
   --q-code-text: #d5d7cf;
-  --q-inline-code-bg: #202329;
+  --q-inline-code-bg: transparent;
   --q-inline-code-border: #3a3f48;
   --q-inline-code-text: #d5d7cf;
   --q-code-comment: #73776c;
@@ -110,7 +110,7 @@
   --q-border-strong: #d4d4d4;
   --q-code-bg: #ffffff;
   --q-code-text: #202329;
-  --q-inline-code-bg: color-mix(in oklab, var(--primary) 10%, #ffffff);
+  --q-inline-code-bg: transparent;
   --q-inline-code-border: color-mix(in oklab, var(--primary) 34%, #ffffff);
   --q-inline-code-text: var(--primary);
   --q-code-comment: #6c737f;
