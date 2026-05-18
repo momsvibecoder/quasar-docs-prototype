@@ -5,7 +5,7 @@ type CalloutType = 'note' | 'important' | 'warning';
 
 const styles: Record<CalloutType, string> = {
   note: 'q-callout-note',
-  important: 'q-callout-important',
+  important: 'q-callout-warning',
   warning: 'q-callout-warning',
 };
 

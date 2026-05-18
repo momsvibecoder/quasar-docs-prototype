@@ -431,8 +431,7 @@ body {
   margin: 1.5rem 0;
 }
 
-.q-callout-note,
-.q-callout-important {
+.q-callout-note {
   border-color: var(--q-callout-note-border);
   background: var(--q-callout-note-bg);
 }
