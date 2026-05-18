@@ -64,11 +64,11 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       </header>
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:grid-cols-[282px_minmax(0,1fr)]">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto border-r border-border bg-background px-4 py-6 lg:block">
+        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto bg-background px-4 py-6 lg:block">
           <nav className="docs-sidebar space-y-1">
             {docsNavGroups.map((group) => (
               <details key={group.title} className="group/sidebar">
-                <summary className="flex cursor-pointer list-none items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition hover:bg-accent hover:text-foreground">
+                <summary className="flex cursor-pointer list-none items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition hover:text-primary">
                   <ChevronRight className="q-sidebar-chevron h-3.5 w-3.5 shrink-0 transition-transform" aria-hidden="true" />
                   <span>{group.title}</span>
                 </summary>
@@ -77,7 +77,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                     <a
                       key={`${group.title}-${item.title}`}
                       href={item.href}
-                      className="block rounded-md px-2 py-1.5 text-sm leading-5 text-secondary-foreground transition hover:bg-accent hover:text-foreground"
+                      className="block rounded-md px-2 py-1.5 text-sm leading-5 text-secondary-foreground transition hover:text-primary"
                     >
                       {item.title}
                     </a>
@@ -90,7 +90,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         {children}
       </div>
       <footer className="border-t border-[#23262b] bg-[#141618] text-white">
-        <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12">
+        <div className="mx-auto max-w-[1440px] px-6 pb-8 pt-14 lg:px-12">
           <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.75fr)]">
             <div>
               <a href="/docs" className="inline-flex">
@@ -113,7 +113,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             <div className="grid gap-10 sm:grid-cols-2">
             {footerGroups.map((group) => (
               <nav key={group.title} aria-label={group.title}>
-                <div className="mb-5 text-lg font-semibold leading-6 text-white">
+                <div className="mb-5 text-sm font-semibold uppercase leading-5 tracking-wide text-white/88">
                   {group.title}
                 </div>
                 <div className="space-y-3.5">
@@ -121,7 +121,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                     <a
                       key={`${group.title}-${item.title}`}
                       href={item.href}
-                      className="flex w-fit items-center gap-2 text-sm text-white/58 transition hover:text-white"
+                      className="flex w-fit items-center gap-2 text-sm text-white/58 transition hover:text-white hover:underline hover:underline-offset-4"
                     >
                       {item.title}
                     </a>
@@ -131,9 +131,9 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             ))}
             </div>
           </div>
-          <div className="mt-14 flex flex-col gap-4 border-t border-white/[0.06] pt-6 text-sm text-white/48 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.03] pt-4 text-sm text-[rgba(255,255,255,0.18)] sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 QuasarDB SAS. All Rights Reserved.</span>
-            <a href="https://quasar.ai/privacy-policy/" className="transition hover:text-white">
+            <a href="https://quasar.ai/privacy-policy/" className="transition hover:text-white/55">
               Privacy Policy
             </a>
           </div>

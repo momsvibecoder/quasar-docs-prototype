@@ -42,12 +42,12 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
   return (
     <main className="grid min-h-[calc(100vh-4rem)] grid-cols-1 xl:grid-cols-[minmax(0,820px)_260px]">
       <article className="px-5 py-10 md:px-10 lg:px-14">
-        <div className="mb-4 text-sm font-medium text-primary">QuasarDB Docs</div>
-        <h1 className="mb-4 max-w-3xl text-4xl font-semibold leading-tight tracking-normal text-foreground md:text-5xl">
+        <div className="mb-3 text-sm font-medium text-primary">QuasarDB Docs</div>
+        <h1 className="mb-4 max-w-3xl text-[40px] font-semibold leading-[48px] tracking-normal text-foreground">
           {page.data.title}
         </h1>
         {page.data.description ? (
-          <p className="mb-8 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
+          <p className="mb-6 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg md:leading-8">
             {page.data.description}
           </p>
         ) : null}
@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
           <MDX components={components} />
         </div>
       </article>
-      <aside className="hidden border-l border-border px-6 py-12 xl:block">
+      <aside className="hidden px-6 py-12 xl:block">
         <div className="sticky top-24">
           <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">On this page</div>
           <div className="space-y-2">

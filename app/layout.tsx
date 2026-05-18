@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import './global.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -178,7 +177,61 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         {children}
-        <ThemeSwitcher />
+        <div
+          className="fixed bottom-4 right-4 z-[90] flex rounded-full border border-border bg-card p-1 shadow-[0_12px_34px_rgb(0_0_0/0.22)]"
+          aria-label="Theme switcher"
+        >
+          <button
+            type="button"
+            title="Light theme"
+            aria-label="Light theme"
+            aria-pressed="false"
+            data-theme-option="light"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition hover:text-foreground aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+          >
+            <svg
+              className="h-4 w-4"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            title="Dark theme"
+            aria-label="Dark theme"
+            aria-pressed="true"
+            data-theme-option="dark"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition hover:text-foreground aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+          >
+            <svg
+              className="h-4 w-4"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20.99 12.49a9 9 0 1 1-9.48-9.48 6 6 0 0 0 9.48 9.48Z" />
+            </svg>
+          </button>
+        </div>
       </body>
     </html>
   );

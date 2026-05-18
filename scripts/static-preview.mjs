@@ -38,8 +38,20 @@ function fileFor(urlPath) {
   return safeJoin(join(root, 'public'), clean.slice(1));
 }
 
+function resolvePreviewFile(file) {
+  if (file && existsSync(file) && statSync(file).isFile()) return file;
+  if (!file || extname(file) !== '.html') return file;
+
+  const nextGeneratedVariant = file.replace(/\.html$/, ' 2.html');
+  if (existsSync(nextGeneratedVariant) && statSync(nextGeneratedVariant).isFile()) {
+    return nextGeneratedVariant;
+  }
+
+  return file;
+}
+
 createServer((req, res) => {
-  const file = fileFor(req.url ?? '/');
+  const file = resolvePreviewFile(fileFor(req.url ?? '/'));
 
   if (!file || !existsSync(file) || !statSync(file).isFile()) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });

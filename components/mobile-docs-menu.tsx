@@ -69,7 +69,7 @@ export function MobileDocsMenu({ groups }: { groups: DocsNavGroup[] }) {
                   <a
                     href={group.href}
                     data-mobile-menu-link
-                    className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:bg-accent hover:text-foreground"
+                    className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:text-primary"
                     onClick={() => setOpen(false)}
                   >
                     Overview
@@ -79,7 +79,7 @@ export function MobileDocsMenu({ groups }: { groups: DocsNavGroup[] }) {
                       key={`${group.title}-${item.title}`}
                       href={item.href}
                       data-mobile-menu-link
-                      className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:bg-accent hover:text-foreground"
+                      className="block rounded-md px-2 py-2 text-base text-muted-foreground transition hover:text-primary"
                       onClick={() => setOpen(false)}
                     >
                       {item.title}

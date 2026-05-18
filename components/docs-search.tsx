@@ -112,7 +112,7 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
       <div className="ml-auto flex md:hidden">
         <button
           type="button"
-          className="q-docs-search-trigger flex h-9 w-9 items-center justify-center rounded-md"
+          className="q-docs-search-mobile-button flex h-9 w-9 items-center justify-center rounded-md"
           aria-label="Search docs"
           data-docs-search-trigger
           onClick={() => setOpen(true)}
