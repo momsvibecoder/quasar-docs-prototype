@@ -17,7 +17,7 @@ export function Callout({
   ...props
 }: HTMLAttributes<HTMLDivElement> & { type?: CalloutType; title?: string }) {
   return (
-    <div className={cn('q-callout flex flex-col gap-3 rounded-lg border p-5 text-sm leading-6', styles[type], className)} {...props}>
+    <div className={cn('q-callout flex flex-col gap-2 rounded-lg border p-5 text-sm leading-6', styles[type], className)} {...props}>
       {title ? <div className="text-base font-semibold leading-6 text-foreground">{title}</div> : null}
       <div className="q-callout-content text-muted-foreground [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
         {children}
