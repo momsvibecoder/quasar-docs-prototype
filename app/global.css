@@ -412,7 +412,7 @@ body {
 }
 
 .fd-docs .q-doc-section + .q-doc-section {
-  padding-top: 24px;
+  padding-top: 48px;
 }
 
 .fd-docs .q-doc-section > * {
@@ -512,6 +512,10 @@ body {
 .fd-docs[data-doc-slug='user-guide'] h2 {
   margin: 0;
   padding-top: 2rem;
+}
+
+.fd-docs[data-doc-slug='user-guide'] .q-doc-section + .q-doc-section {
+  padding-top: 24px;
 }
 
 .fd-docs[data-doc-slug='user-guide'] ul,
