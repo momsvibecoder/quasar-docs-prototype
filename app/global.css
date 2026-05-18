@@ -689,6 +689,65 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+.q-docker-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.fd-docs .q-docker-images-table {
+  min-width: 860px;
+}
+
+.fd-docs .q-docker-images-table th,
+.fd-docs .q-docker-images-table td {
+  border-right: 1px solid var(--border);
+}
+
+.fd-docs .q-docker-images-table th:last-child,
+.fd-docs .q-docker-images-table td:last-child {
+  border-right: 0;
+}
+
+.fd-docs .q-docker-images-table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.fd-docs .q-docker-images-table td:nth-child(3),
+.fd-docs .q-docker-images-table td:nth-child(4) {
+  vertical-align: top;
+}
+
+.fd-docs .q-docker-images-table a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.fd-docs .q-docker-images-table a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fd-docs .q-docker-images-table ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding-left: 1.35rem;
+}
+
+.fd-docs .q-docker-images-table li {
+  margin: 0;
+  padding-left: 0.1rem;
+}
+
+.q-docker-table-na {
+  color: var(--muted-foreground);
+}
+
 .q-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

@@ -8,6 +8,7 @@ import { ChartPlaceholder, Figure } from '@/components/ui/figure';
 import { Tab, TabList, TabPanel, Tabs as TabsRoot } from '@/components/ui/tabs';
 import { DocPager as DocPagerRoot } from '@/components/ui/doc-pager';
 import { CodeBlock } from '@/components/ui/code-block';
+import { DockerImagesTable as DockerImagesTableRoot } from '@/components/ui/docker-images-table';
 
 function DocObject({ children }: { children: ReactNode }) {
   return <div className="q-doc-object">{children}</div>;
@@ -33,6 +34,11 @@ export function getMDXComponents(base: MDXComponents = {}): MDXComponents {
     DocPager: (props) => (
       <DocObject>
         <DocPagerRoot {...props} />
+      </DocObject>
+    ),
+    DockerImagesTable: () => (
+      <DocObject>
+        <DockerImagesTableRoot />
       </DocObject>
     ),
     pre: (props) => (
