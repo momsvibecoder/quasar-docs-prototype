@@ -63,8 +63,10 @@
   --q-aside-border: #3a3f48;
   --q-callout-note-bg: rgb(52 211 153 / 0.1);
   --q-callout-note-border: rgb(52 211 153 / 0.45);
+  --q-callout-note-header: rgb(52 211 153 / 0.16);
   --q-callout-warning-bg: #2b2513;
   --q-callout-warning-border: #9d7a21;
+  --q-callout-warning-header: #3a2f14;
 
   --fd-background: 210 9% 9%;
   --fd-foreground: 0 0% 100%;
@@ -141,8 +143,10 @@
   --q-aside-border: #d4d4d4;
   --q-callout-note-bg: rgb(52 211 153 / 0.11);
   --q-callout-note-border: rgb(52 211 153 / 0.5);
+  --q-callout-note-header: rgb(52 211 153 / 0.16);
   --q-callout-warning-bg: #fffcef;
   --q-callout-warning-border: #efd36c;
+  --q-callout-warning-header: #fff8db;
 
   --fd-background: 0 0% 100%;
   --fd-foreground: 0 0% 0%;
@@ -434,11 +438,23 @@ body {
 .q-callout-note {
   border-color: var(--q-callout-note-border);
   background: var(--q-callout-note-bg);
+  --q-callout-accent: var(--q-callout-note-border);
+  --q-callout-header-bg: var(--q-callout-note-header);
 }
 
 .q-callout-warning {
   border-color: var(--q-callout-warning-border);
   background: var(--q-callout-warning-bg);
+  --q-callout-accent: var(--q-callout-warning-border);
+  --q-callout-header-bg: var(--q-callout-warning-header);
+}
+
+.fd-docs .q-callout-header {
+  background: var(--q-callout-header-bg);
+}
+
+.fd-docs .q-callout-icon {
+  color: var(--q-callout-accent);
 }
 
 .fd-docs .q-callout-content {

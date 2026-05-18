@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from 'react';
+import { AlertTriangle, Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type CalloutType = 'note' | 'important' | 'warning';
@@ -16,10 +17,16 @@ export function Callout({
   children,
   ...props
 }: HTMLAttributes<HTMLDivElement> & { type?: CalloutType; title?: string }) {
+  const Icon = type === 'note' ? Pencil : AlertTriangle;
+  const label = title ?? (type === 'note' ? 'Note' : 'Important');
+
   return (
-    <div className={cn('q-callout flex flex-col gap-2 rounded-lg border p-5 text-sm leading-6', styles[type], className)} {...props}>
-      {title ? <div className="text-base font-semibold leading-6 text-foreground">{title}</div> : null}
-      <div className="q-callout-content text-muted-foreground [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
+    <div className={cn('q-callout overflow-hidden rounded-lg border text-sm leading-6', styles[type], className)} {...props}>
+      <div className="q-callout-header flex items-center gap-2 px-5 py-3 text-base font-semibold leading-6 text-foreground">
+        <Icon className="q-callout-icon h-4 w-4 shrink-0" aria-hidden="true" />
+        <span>{label}</span>
+      </div>
+      <div className="q-callout-content p-5 text-muted-foreground [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
         {children}
       </div>
     </div>
