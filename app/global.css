@@ -319,8 +319,8 @@ body {
   margin-bottom: 0;
 }
 
-.fd-docs .q-doc-object + .q-doc-object {
-  padding-top: 0.75rem;
+.fd-docs .q-doc-object:has(+ .q-doc-object) {
+  padding-bottom: 0.75rem;
 }
 
 .fd-docs h1,
@@ -354,12 +354,6 @@ body {
 
 .fd-docs p {
   margin: 0;
-}
-
-.fd-docs p:has(+ .q-doc-object),
-.fd-docs ul:has(+ .q-doc-object),
-.fd-docs ol:has(+ .q-doc-object) {
-  padding-bottom: 0.5rem;
 }
 
 .fd-docs ul,
