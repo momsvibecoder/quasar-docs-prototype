@@ -748,6 +748,151 @@ body {
   color: var(--muted-foreground);
 }
 
+.q-install-options {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--q-border-strong);
+  border-radius: 0.75rem;
+  background: var(--card);
+}
+
+.q-install-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 82%, var(--background));
+}
+
+.q-install-tabs button {
+  min-width: 8rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 2px solid transparent;
+  padding: 0.85rem 1.25rem;
+  color: var(--muted-foreground);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.q-install-tabs button:hover {
+  background: var(--q-card-hover-bg);
+  color: var(--foreground);
+}
+
+.q-install-tabs button[aria-selected='true'] {
+  background: var(--card);
+  border-bottom-color: var(--primary);
+  color: var(--foreground);
+}
+
+.q-install-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.q-install-panel-kicker {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--q-bg-subtle);
+  color: var(--muted-foreground);
+  padding: 0.25rem 0.65rem;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.q-install-panel-stack,
+.q-install-panel-stack section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.q-install-panel-stack section + section {
+  padding-top: 0.75rem;
+}
+
+.q-install-panel-stack h3,
+.q-install-panel-stack h4,
+.q-install-panel-stack p,
+.q-install-panel-stack ol,
+.q-install-panel-stack li {
+  margin: 0;
+}
+
+.q-install-panel-stack h3 {
+  color: var(--foreground);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.q-install-panel-stack h4 {
+  color: var(--foreground);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.q-install-panel-stack p,
+.q-install-panel-stack li {
+  color: var(--q-prose-body);
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.q-install-panel-stack > section > ol,
+.q-install-panel-stack section > ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-left: 1.35rem;
+}
+
+.q-install-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.q-install-subtabs button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--q-bg-subtle);
+  color: var(--muted-foreground);
+  padding: 0.35rem 0.7rem;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.q-install-subtabs button:hover {
+  color: var(--foreground);
+}
+
+.q-install-subtabs button[aria-selected='true'] {
+  border-color: color-mix(in oklab, var(--primary) 50%, var(--border));
+  background: color-mix(in oklab, var(--primary) 12%, var(--card));
+  color: var(--primary);
+}
+
 .q-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

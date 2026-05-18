@@ -32,69 +32,7 @@ The Core2 build is optimized for older CPUs, at a slight cost of performance.
 
 The installation instruction may differ, depending on the operating system you are installing on.
 
-<Tabs defaultValue="linux">
-  <TabList>
-    <Tab value="docker">Docker</Tab>
-    <Tab value="windows">Windows</Tab>
-    <Tab value="linux" active>Linux</Tab>
-  </TabList>
-  <TabPanel value="docker" title="Docker quick start">
-
-```bash
-docker run -p 2836-2837:2836-2837 -d --name qdb-server bureau14/qdb
-docker run -ti --link qdb-server:qdb-server bureau14/qdbsh \
-  --cluster qdb://qdb-server:2836
-```
-
-  </TabPanel>
-  <TabPanel value="windows" title="Windows package installation">
-
-```powershell
-winget install QuasarDB.Server
-qdbsh --cluster qdb://127.0.0.1:2836
-```
-
-  </TabPanel>
-  <TabPanel value="linux" title="Linux package installation">
-
-```bash
-echo "deb [trusted=yes] https://repo.quasar.ai/stable/ /" \
-  | sudo tee /etc/apt/sources.list.d/quasardb.list
-
-apt install qdb-server qdbsh
-systemctl enable --now quasardb
-```
-
-  </TabPanel>
-</Tabs>
-
-### Available images
-
-QuasarDB hosts various Docker images on the official docker hub:
-
-<DockerImagesTable />
-
-### Available tags
-
-All images follow the same tag format:
-
-| Tag | Description | QuasarDB version |
-| --- | --- | --- |
-| `latest` | Latest officially supported image | `3.15.7` |
-| `beta` | Latest beta version | `3.15.7` |
-| `stable` | Latest stable version | `3.14.2` |
-| `3.14` | Latest version in the 3.14 branch | `3.14.2` |
-| `*-core2` | Core2 variant for older CPUs | `3.15.7-core2` |
-
-### Environment variables
-
-The QuasarDB docker containers provide several environment variables you can use to configure common settings.
-
-| Variable | Usage | Default |
-| --- | --- | --- |
-| `QDB_CLUSTER` | Cluster URI | `qdb://127.0.0.1:2836` |
-| `QDB_SECURITY_FILE` | User security file | empty |
-| `QDB_LOG_LEVEL` | Log verbosity | `info` |
+<InstallationOptions />
 
 </DocSection>
 
