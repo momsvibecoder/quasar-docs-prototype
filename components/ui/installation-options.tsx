@@ -1,6 +1,5 @@
 'use client';
 
-import { FileText, Package, Server } from 'lucide-react';
 import { useState } from 'react';
 import { Callout } from '@/components/ui/callout';
 import { CodeBlock } from '@/components/ui/code-block';
@@ -351,12 +350,6 @@ export function InstallationOptions() {
       </div>
 
       <div className="q-install-content" role="tabpanel">
-        <div className="q-install-panel-kicker">
-          {active === 'docker' ? <Package className="h-4 w-4" aria-hidden="true" /> : null}
-          {active === 'windows' ? <FileText className="h-4 w-4" aria-hidden="true" /> : null}
-          {active === 'linux' ? <Server className="h-4 w-4" aria-hidden="true" /> : null}
-          <span>{installTabs.find((tab) => tab.value === active)?.label} installation</span>
-        </div>
         {active === 'docker' ? <DockerPanel /> : null}
         {active === 'windows' ? <WindowsPanel /> : null}
         {active === 'linux' ? <LinuxPanel /> : null}
