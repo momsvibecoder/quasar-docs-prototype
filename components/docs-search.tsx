@@ -4,6 +4,7 @@ import { BookOpen, FileText, Search, X } from 'lucide-react';
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { DocsSearchItem } from '@/lib/docs-nav';
+import { externalLinkProps, isExternalHref } from '@/lib/link-utils';
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
@@ -89,7 +90,14 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
 
     if (event.key === 'Enter' && results[activeIndex]) {
       event.preventDefault();
-      window.location.href = results[activeIndex].href;
+      const { href } = results[activeIndex];
+
+      if (isExternalHref(href)) {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = href;
+      }
+
       close();
     }
   }
@@ -173,6 +181,7 @@ export function DocsSearch({ items }: { items: DocsSearchItem[] }) {
                       }`}
                       onClick={close}
                       onMouseEnter={() => setActiveIndex(index)}
+                      {...externalLinkProps(item.href)}
                     >
                       {item.type === 'page' ? (
                         <BookOpen className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />

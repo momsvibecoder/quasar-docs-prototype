@@ -4,6 +4,7 @@ import { DocsSearch } from '@/components/docs-search';
 import { MobileDocsMenu } from '@/components/mobile-docs-menu';
 import { quasarLogoSrc } from '@/lib/brand';
 import { docsNavGroups, docsSearchItems, footerGroups } from '@/lib/docs-nav';
+import { externalLinkProps } from '@/lib/link-utils';
 
 const socialLinks = [
   {
@@ -55,7 +56,11 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </a>
           <DocsSearch items={docsSearchItems} />
           <div className="ml-auto hidden items-center gap-4 md:flex">
-            <a href="https://quasar.ai" className="q-header-link inline-flex items-center gap-1.5 text-sm">
+            <a
+              href="https://quasar.ai"
+              className="q-header-link inline-flex items-center gap-1.5 text-sm"
+              {...externalLinkProps('https://quasar.ai')}
+            >
               Go to site
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
@@ -74,7 +79,12 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                 </summary>
                 <div className="q-menu-sublist">
                   {group.items.map((item) => (
-                    <a key={`${group.title}-${item.title}`} href={item.href} className="q-menu-subitem">
+                    <a
+                      key={`${group.title}-${item.title}`}
+                      href={item.href}
+                      className="q-menu-subitem"
+                      {...externalLinkProps(item.href)}
+                    >
                       {item.title}
                     </a>
                   ))}
@@ -100,6 +110,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                     href={item.href}
                     className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-white/54 transition hover:border-white/18 hover:bg-white/[0.04] hover:text-white"
                     aria-label={item.title}
+                    {...externalLinkProps(item.href)}
                   >
                     <span className="h-4 w-4 [&_svg]:block [&_svg]:h-4 [&_svg]:w-4">{item.icon}</span>
                   </a>
@@ -118,6 +129,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
                       key={`${group.title}-${item.title}`}
                       href={item.href}
                       className="flex w-fit items-center gap-2 text-sm text-white/[0.58] transition hover:text-white/[0.44]"
+                      {...externalLinkProps(item.href)}
                     >
                       {item.title}
                     </a>
@@ -129,7 +141,11 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.03] pt-4 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 QuasarDB SAS. All Rights Reserved.</span>
-            <a href="https://quasar.ai/privacy-policy/" className="transition hover:text-white/55">
+            <a
+              href="https://quasar.ai/privacy-policy/"
+              className="transition hover:text-white/55"
+              {...externalLinkProps('https://quasar.ai/privacy-policy/')}
+            >
               Privacy Policy
             </a>
           </div>
