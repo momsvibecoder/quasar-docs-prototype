@@ -37,41 +37,41 @@ export function MobileDocsMenu({ groups }: { groups: DocsNavGroup[] }) {
         id="mobile-docs-menu"
         data-mobile-docs-menu
         hidden={!open}
-        className="fixed inset-0 z-[60] overflow-y-auto bg-background text-foreground lg:hidden"
+        className="q-mobile-menu fixed inset-0 z-[60] overflow-y-auto bg-background text-foreground lg:hidden"
         role="dialog"
         aria-modal="true"
         aria-label="Documentation menu"
       >
-        <div className="flex min-h-screen flex-col px-6 py-6">
-          <div className="mb-10 flex items-center justify-between">
+        <div className="q-mobile-menu-shell">
+          <div className="q-mobile-menu-header">
             <a href="/docs" className="inline-flex" data-mobile-menu-link onClick={() => setOpen(false)}>
-              <img src={quasarLogoSrc} alt="Quasar" className="q-brand-logo q-brand-logo-header" />
+              <img src={quasarLogoSrc} alt="Quasar" className="q-brand-logo q-mobile-menu-logo" />
             </a>
             <button
               type="button"
               data-mobile-menu-close
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground"
+              className="q-mobile-menu-close"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
             >
-              <X className="h-5 w-5" aria-hidden="true" />
+              <X aria-hidden="true" />
             </button>
           </div>
 
-          <nav className="docs-sidebar" aria-label="Mobile documentation navigation">
+          <nav className="q-mobile-menu-nav" aria-label="Mobile documentation navigation">
             {groups.map((group) => (
-              <details key={group.title} className="q-menu-group">
-                <summary className="q-menu-selector">
-                  <ChevronRight className="q-menu-selector-icon" aria-hidden="true" />
+              <details key={group.title} className="q-mobile-menu-group">
+                <summary className="q-mobile-menu-selector">
                   <span>{group.title}</span>
+                  <ChevronRight className="q-mobile-menu-chevron" aria-hidden="true" />
                 </summary>
-                <div className="q-menu-sublist">
+                <div className="q-mobile-menu-sublist">
                   {group.items.map((item) => (
                     <a
                       key={`${group.title}-${item.title}`}
                       href={item.href}
                       data-mobile-menu-link
-                      className="q-menu-subitem"
+                      className="q-mobile-menu-subitem"
                       onClick={() => setOpen(false)}
                     >
                       {item.title}
@@ -81,15 +81,6 @@ export function MobileDocsMenu({ groups }: { groups: DocsNavGroup[] }) {
               </details>
             ))}
           </nav>
-
-          <div className="mt-auto pt-10">
-            <a
-              href="https://quasar.ai/contact/"
-              className="flex h-12 items-center justify-center rounded-lg border border-border bg-card text-base font-medium text-foreground"
-            >
-              Contact
-            </a>
-          </div>
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { Callout } from '@/components/ui/callout';
 import { CodeBlock } from '@/components/ui/code-block';
@@ -25,105 +26,113 @@ function CodeSnippet({ language, children }: { language: string; children: strin
   );
 }
 
+function TableScroll({ children }: { children: ReactNode }) {
+  return <div className="q-table-scroll">{children}</div>;
+}
+
 function TagsTable() {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Tag</th>
-          <th>Description</th>
-          <th>QuasarDB version</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <code>latest</code>
-          </td>
-          <td>Latest officially supported image</td>
-          <td>
-            <code>3.15.7</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>beta</code>
-          </td>
-          <td>Latest beta version</td>
-          <td>
-            <code>3.15.7</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>stable</code>
-          </td>
-          <td>Latest stable version</td>
-          <td>
-            <code>3.14.2</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>3.14</code>
-          </td>
-          <td>Latest version in the 3.14 branch</td>
-          <td>
-            <code>3.14.2</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>*-core2</code>
-          </td>
-          <td>Core2 variant for older CPUs</td>
-          <td>
-            <code>3.15.7-core2</code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <TableScroll>
+      <table>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Description</th>
+            <th>QuasarDB version</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>latest</code>
+            </td>
+            <td>Latest officially supported image</td>
+            <td>
+              <code>3.15.7</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>beta</code>
+            </td>
+            <td>Latest beta version</td>
+            <td>
+              <code>3.15.7</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>stable</code>
+            </td>
+            <td>Latest stable version</td>
+            <td>
+              <code>3.14.2</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>3.14</code>
+            </td>
+            <td>Latest version in the 3.14 branch</td>
+            <td>
+              <code>3.14.2</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>*-core2</code>
+            </td>
+            <td>Core2 variant for older CPUs</td>
+            <td>
+              <code>3.15.7-core2</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </TableScroll>
   );
 }
 
 function EnvTable() {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Usage</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <code>QDB_CLUSTER</code>
-          </td>
-          <td>Cluster URI</td>
-          <td>
-            <code>qdb://127.0.0.1:2836</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>QDB_SECURITY_FILE</code>
-          </td>
-          <td>User security file</td>
-          <td>empty</td>
-        </tr>
-        <tr>
-          <td>
-            <code>QDB_LOG_LEVEL</code>
-          </td>
-          <td>Log verbosity</td>
-          <td>
-            <code>info</code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <TableScroll>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Usage</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>QDB_CLUSTER</code>
+            </td>
+            <td>Cluster URI</td>
+            <td>
+              <code>qdb://127.0.0.1:2836</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>QDB_SECURITY_FILE</code>
+            </td>
+            <td>User security file</td>
+            <td>empty</td>
+          </tr>
+          <tr>
+            <td>
+              <code>QDB_LOG_LEVEL</code>
+            </td>
+            <td>Log verbosity</td>
+            <td>
+              <code>info</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </TableScroll>
   );
 }
 
@@ -247,34 +256,36 @@ systemctl enable --now quasardb
             </section>
             <section>
               <h4>File locations</h4>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Files type</th>
-                    <th>Location</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Configuration files</td>
-                    <td>
-                      <code>/etc/qdb</code>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Logs</td>
-                    <td>
-                      <code>/var/log/qdb</code>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Database depot</td>
-                    <td>
-                      <code>/var/lib/qdb</code>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <TableScroll>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Files type</th>
+                      <th>Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Configuration files</td>
+                      <td>
+                        <code>/etc/qdb</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Logs</td>
+                      <td>
+                        <code>/var/log/qdb</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Database depot</td>
+                      <td>
+                        <code>/var/lib/qdb</code>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </TableScroll>
             </section>
           </div>
         ) : null}
