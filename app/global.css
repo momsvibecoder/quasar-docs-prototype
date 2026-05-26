@@ -490,7 +490,7 @@ body {
 }
 
 .q-breadcrumbs {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   color: var(--muted-foreground);
   font-size: 14px;
   font-weight: 400;
