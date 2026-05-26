@@ -216,6 +216,14 @@ body {
   padding: 24px 16px;
 }
 
+.q-docs-sidebar-pane {
+  border-right: 1px solid color-mix(in oklab, var(--border) 64%, transparent);
+}
+
+.q-docs-toc-pane {
+  border-left: 1px solid color-mix(in oklab, var(--border) 64%, transparent);
+}
+
 .q-menu-selector {
   display: flex;
   width: 250px;
@@ -479,6 +487,60 @@ body {
 .q-header-icon-button:hover {
   background: color-mix(in oklab, var(--q-header-fg) 7%, transparent);
   color: var(--q-header-muted-hover);
+}
+
+.q-breadcrumbs {
+  margin-bottom: 12px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.q-breadcrumbs ol {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.q-breadcrumbs li {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.q-breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.q-breadcrumbs a:hover,
+.q-breadcrumbs a:focus-visible {
+  color: var(--foreground);
+}
+
+.q-breadcrumbs a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.q-breadcrumbs span[aria-current='page'] {
+  color: var(--foreground);
+}
+
+.q-breadcrumb-separator {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  color: color-mix(in oklab, var(--muted-foreground) 74%, transparent);
+  stroke-width: 2;
 }
 
 .q-docs-search-trigger {

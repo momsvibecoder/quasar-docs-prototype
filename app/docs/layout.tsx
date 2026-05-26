@@ -69,7 +69,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       </header>
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:grid-cols-[282px_minmax(0,1fr)]">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto bg-background lg:block">
+        <aside className="q-docs-sidebar-pane sticky top-16 hidden h-[calc(100vh-4rem)] self-start overflow-y-auto bg-background lg:block">
           <nav className="docs-sidebar" aria-label="Documentation navigation">
             {docsNavGroups.map((group) => (
               <details key={group.title} className="q-menu-group">
